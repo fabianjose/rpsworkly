@@ -6,7 +6,7 @@ const mysql = require('mysql')
 const myconnection = require('express-myconnection')
 
 //importando rutas
-const customerRoutes = require('./routes/customer')
+const customerRoutes = require('./routes/usuarios')
 
 // configuraciones
 app.set('port', process.env.PORT || 3000)
@@ -22,7 +22,7 @@ app.use(myconnection(mysql,{
     user:"root",
     password:"",
     port: 3306,
-    database:"crudnodejsmysql"
+    database:"workly"
 },'single'))
 app.use(express.urlencoded({extends:false}))
 

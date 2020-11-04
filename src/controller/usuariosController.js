@@ -2,14 +2,14 @@ const controller = {};
 
 controller.list = (req,res)=>{
 req.getConnection((err, conn)=>{
-    conn.query('SELECT * FROM customers',(err, customers)=>{
+    conn.query('SELECT * FROM usuarios',(err, usuario)=>{
         if(err){
             res.json(err)
         }
 
     
-        res.render('customers',{
-          data:customers
+        res.render('usuarios',{
+          data:usuario
         })
         
     })
@@ -21,9 +21,9 @@ const data = req.body
 console.log(req.body);
 
 req.getConnection((err, conn)=>{
-    conn.query('INSERT INTO customers set ?', [data], (err, customer)=>{
+    conn.query('INSERT INTO usuarios set ?', [data], (err, usuario)=>{
        
-     console.log(customer);   
+     console.log(usuario);   
      res.redirect('/')
     })
 })
@@ -38,12 +38,12 @@ controller.update = (req, res) =>{
     console.log(id);
     req.getConnection((err, conn)=>{
     
-        conn.query('SELECT * FROM customers where id =?', [id], (err, customer)=>{
+        conn.query('SELECT * FROM usuarios where id =?', [id], (err, usuario)=>{
       
-            console.log(customer);
+            console.log(usuario);
 
-         res.render('edit_customer',{
-             data:customer[0]
+         res.render('edit_usuario',{
+             data:usuario[0]
          });
         
         })
@@ -52,11 +52,11 @@ controller.update = (req, res) =>{
 
     controller.saveUpdate = (req, res) =>{
         var id = req.params.id;
-       const  newCustomer = req.body
+       const  newUsuario = req.body
    
         req.getConnection((err, conn)=>{
         
-            conn.query('UPDATE customers set ? where id =?',[newCustomer,id], (err, customer)=>{
+            conn.query('UPDATE customers set ? where id =?',[newCustomer,id], (err, usuario)=>{
           
                 
     res.redirect("/");
