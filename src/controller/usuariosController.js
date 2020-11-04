@@ -56,7 +56,7 @@ controller.update = (req, res) =>{
    
         req.getConnection((err, conn)=>{
         
-            conn.query('UPDATE customers set ? where id =?',[newCustomer,id], (err, usuario)=>{
+            conn.query('UPDATE usuarios set ? where id =?',[newUsuario,id], (err, usuario)=>{
           
                 
     res.redirect("/");
@@ -83,7 +83,7 @@ controller.update = (req, res) =>{
 controller.delete = (req, res) =>{
       
         req.getConnection((err, conn)=>{
-            conn.query('DELETE FROM customers where id =?', [req.params.id], (err, rows)=>{
+            conn.query('DELETE FROM usuarios where id =?', [req.params.id], (err, rows)=>{
                
                
              res.redirect('/')
