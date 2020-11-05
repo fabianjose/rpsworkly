@@ -6,16 +6,16 @@ var moment = require('moment');
 exports.createToken = function(user){
 
 	var payload = {
-		sub: user._id,
-		name: user.name,
-		surname: user.surname,
-		email: user.email,
+		id: user.id,
+		name: user.nombre,
+		apellido: user.apellido,
+		correo: user.correo,
 		role: user.role,
-		image: user.image,
+		logo: user.logo,
 		iat: moment().unix(),
 		exp: moment().add(30, 'days').unix
 	}
 
-	return jwt.encode(payload, 'clave-secreta-para-generar-el-token-9999');
+	return jwt.encode(payload, 'clave-secreta-workly-para-generar-el-token-123999');
 	
 };
