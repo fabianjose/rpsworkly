@@ -4,7 +4,7 @@ const router = express.Router();
 const usuariosController = require("../controller/usuariosController")
 var md_auth = require('../middlewares/authenticated');
 
-router.get('/',usuariosController.list)
+// router.get('/',usuariosController.list)
 
 router.get('/',usuariosController.home )
 router.get('/registro',usuariosController.registro )
