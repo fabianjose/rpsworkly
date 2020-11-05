@@ -1,5 +1,26 @@
 const controller = {};
 
+
+controller.home =(req, res)=>{
+    res.render('index')
+}
+
+controller.registro =(req, res)=>{
+    res.render('registro')
+}
+
+controller.login =(req, res)=>{
+    res.render('login')
+}
+
+controller.crear_vacante =(req, res)=>{
+    res.render('crear_vacante')
+}
+
+
+
+
+
 controller.list = (req,res)=>{
 req.getConnection((err, conn)=>{
     conn.query('SELECT * FROM usuarios',(err, usuario)=>{
