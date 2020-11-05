@@ -16,17 +16,47 @@ req.getConnection((err, conn)=>{
 })
 }
 
-controller.save = (req, res) =>{
-const data = req.body
-console.log(req.body);
+controller.register = (req,res)=>{
+  res.render('registro');
+}
 
-req.getConnection((err, conn)=>{
-    conn.query('INSERT INTO usuarios set ?', [data], (err, usuario)=>{
-       
-     console.log(usuario);   
-     res.redirect('/')
+controller.save = (req, res) =>{
+  const data = req.body
+  console.log(req.body);
+
+  req.getConnection((err, conn)=>{
+
+    conn.query('SELECT * FROM usuarios where email =?', [data.correo], (err, issetUsuario)=>{
+      if(err){
+        return res.status(500).send({
+          message: "Error al comprobar duplicidad de usuario"
+        });
+      }
+    
+      if(!issetUser){
+
+        bcrypt.hash(data.password, null, null, (err, hash) => {
+          data.password = hash;
+
+          conn.query('INSERT INTO usuarios set ?', [data], (err, usuario)=>{
+            console.log(usuario);   
+            res.redirect('/');
+          });
+
+        });
+
+      }
+     else{
+        return res.status(500).send({
+          message: "El usuario ya esta registrado"
+        });
+
+      }
+        
+
     })
-})
+      
+  })
 }
 
 
@@ -82,14 +112,14 @@ controller.update = (req, res) =>{
 
 controller.delete = (req, res) =>{
       
-        req.getConnection((err, conn)=>{
-            conn.query('DELETE FROM usuarios where id =?', [req.params.id], (err, rows)=>{
-               
-               
-             res.redirect('/')
-            })
-        })
-        }
+  req.getConnection((err, conn)=>{
+      conn.query('DELETE FROM usuarios where id =?', [req.params.id], (err, rows)=>{
+         
+         
+       res.redirect('/')
+      })
+  })
+}
 
 
 
